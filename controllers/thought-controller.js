@@ -49,11 +49,31 @@ const thoughtController = {
       .catch((err) => res.json(err));
   },
 
-  //TODO:⬇️ update thought
-  updateThought() {},
+  //update thought
+  updateThought({ params, body}, res) {
+    thought.findOneAndUpdate({_id: params.id}, body, {new: true})
+    .then((dbThoughtData) => {
+        if(!dbThoughtData) {
+            res.status(404).json({ message: 'There is no thought found with that id!'})
+            return;
+        }
+        res.json(dbThoughtData);
+    })
+    .catch((err) => res.json(400).json(err));
+  },
 
-  //TODO: ⬇️delete thought
-  deleteThought() {},
+  //delete thought
+  deleteThought({params}, res) {
+    thought.findByIdAndDelete({ _id: params.id})
+    .then((dbThoughtData) => {
+        if(!dbThoughtData) {
+            res.status(404).json({message: 'There is no thought found with that id!'})
+            return;
+        }
+        res.json(dbThoughtData);
+    })
+    .catch((err) => res.json(400).json(err));
+  },
 };
 
 module.exports = thoughtController;
