@@ -9,7 +9,6 @@ const reactionSchema = new Schema(
     reactionBody: {
       type: String,
       required: true,
-      //TODO:⬇️ 280 char max
       maxLength: 280,
     },
     username: {
@@ -19,7 +18,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (createdAtVal) => dateFormat(createdAtVal),
+      // get: (createdAtVal) => dateFormat(createdAtVal),
     },
   },
   {
@@ -36,14 +35,13 @@ const ThoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      //TODO:⬇️ must be between 1-280 chars
       minLength: 1,
       maxLength: 280
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (createdAtVal) => dateFormat(createdAtVal),
+      // get: (createdAtVal) => dateFormat(createdAtVal),
     },
     username: {
       type: String,
