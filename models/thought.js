@@ -10,6 +10,7 @@ const reactionSchema = new Schema(
       type: String,
       required: true,
       //TODO:⬇️ 280 char max
+      maxLength: 280,
     },
     username: {
       type: String,
@@ -23,8 +24,10 @@ const reactionSchema = new Schema(
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
+    id: false
   }
 );
 
@@ -34,6 +37,8 @@ const ThoughtSchema = new Schema(
       type: String,
       required: true,
       //TODO:⬇️ must be between 1-280 chars
+      minLength: 1,
+      maxLength: 280
     },
     createdAt: {
       type: Date,
@@ -44,7 +49,6 @@ const ThoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    //TODO:⬇️ array of nested docs created with reactionSchema (like replies)
     reactions: [reactionSchema],
   },
   {
@@ -57,7 +61,6 @@ const ThoughtSchema = new Schema(
 );
 
 //TODO:⬇️ create vitrual called reactionCount that retrieves length of the thought's reactions array field query
-
 
 const thought = model("thought", ThoughtSchema);
 //export the thought model
