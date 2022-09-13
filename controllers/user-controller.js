@@ -1,4 +1,3 @@
-const { support } = require("benchmark");
 const { user } = require("../models");
 
 const userController = {
