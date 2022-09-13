@@ -73,6 +73,12 @@ const userController = {
     })
     .catch((err) => res.json(400).json(err));
   },
+
+  //TODO:⬇️ add user friend
+  addFriend(){},
+
+  //TODO:⬇️ delete a friend
+  deleteFriend(){}, 
 };
 
 module.exports = userController;

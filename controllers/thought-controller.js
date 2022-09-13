@@ -74,6 +74,12 @@ const thoughtController = {
     })
     .catch((err) => res.json(400).json(err));
   },
+
+  //TODO:⬇️ add reaction
+  addReaction(){},
+
+  //TODO:⬇️ delete reaction
+  deleteReaction(){},
 };
 
 module.exports = thoughtController;
