@@ -1,3 +1,4 @@
+const { support } = require("benchmark");
 const { user } = require("../models");
 
 const userController = {
@@ -5,6 +6,12 @@ const userController = {
     //get all users
   getUser(req, res) {
     user.find({})
+    .populate({
+      path: 'thoughts',
+      select: '-__v',
+    })
+    .select('-__v')
+    .sort({ _id: -1})
     .then((dbUserData) => res.json(dbUserData))
     .catch((err) => {
         console.log(err);
@@ -15,6 +22,11 @@ const userController = {
   //get single user by id
   getUserById({ params }, res) {
     user.findOne({ _id: params.id })
+      .populate({
+        path: 'thoughts',
+        select: '-__v',
+      })
+      .select('-__v')
     .then((dbUserData) => {
         //if no user found send 404
         if(!dbUserData) {
