@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 const dateFormat = require('../utils/dateFormat');
 
 const reactionSchema = new Schema(
@@ -24,10 +24,8 @@ const reactionSchema = new Schema(
   },
   {
     toJSON: {
-      virtuals: true,
       getters: true,
     },
-    id: false
   }
 );
 
@@ -60,7 +58,10 @@ const ThoughtSchema = new Schema(
 );
 
 //TODO:⬇️ create vitrual called reactionCount that retrieves length of the thought's reactions array field query
+ThoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 
-const thought = model("thought", ThoughtSchema);
+const Thought = model("thought", ThoughtSchema);
 //export the thought model
-module.exports = thought;
+module.exports = Thought;
